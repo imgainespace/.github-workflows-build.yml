@@ -18,7 +18,7 @@ jobs:
       - name: Build EXE
         run: |
           # Replace 'master_control.py' with your actual filename
-          pyinstaller --onefile --console master_control.py 
+          pyinstaller --onefile --icon=icon.ico master_control.py
 
       - name: Upload Master EXE
         uses: actions/upload-artifact@v4
