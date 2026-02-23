@@ -1,4 +1,4 @@
-name: New Project Builder
+name: Build Bibleshow Master
 on: [push]
 
 jobs:
@@ -10,20 +10,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # Updated to a newer stable version
+          python-version: '3.11'
 
-      - name: Install Dependencies
-        run: |
-          pip install pyinstaller
-          # pip install requests numpy  <-- UNCOMMENT AND ADD LIBRARIES HERE IF NEEDED
+      - name: Install PyInstaller
+        run: pip install pyinstaller
 
       - name: Build EXE
         run: |
-          # CHANGE 'new_script.py' TO YOUR NEW FILENAME
-          pyinstaller --onefile new_script.py 
+          # Replace 'master_control.py' with your actual filename
+          pyinstaller --onefile --console master_control.py 
 
-      - name: Upload EXE
+      - name: Upload Master EXE
         uses: actions/upload-artifact@v4
         with:
-          name: Generated-Windows-App
+          name: Bibleshow-Master-App
           path: dist/*.exe
