@@ -1,0 +1,29 @@
+name: New Project Builder
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Updated to a newer stable version
+
+      - name: Install Dependencies
+        run: |
+          pip install pyinstaller
+          # pip install requests numpy  <-- UNCOMMENT AND ADD LIBRARIES HERE IF NEEDED
+
+      - name: Build EXE
+        run: |
+          # CHANGE 'new_script.py' TO YOUR NEW FILENAME
+          pyinstaller --onefile new_script.py 
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Generated-Windows-App
+          path: dist/*.exe
